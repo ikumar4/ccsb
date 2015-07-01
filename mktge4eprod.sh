@@ -1,0 +1,1 @@
+mvn clean test -Denv.CBURL=https://login.cengage.com/cb/login.htm -Denv.OLRURL=http://olradmin.cengage.com/olr/admin/indes.jsp -Denv.PRODUCT='Lamb/Hair/McDaniel, MKTG (with Online 1 term (6 months) Printed Access Card), 9th Edition'
