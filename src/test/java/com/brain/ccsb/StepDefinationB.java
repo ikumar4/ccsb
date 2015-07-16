@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -36,6 +37,7 @@ public class StepDefinationB {
 			   
 		}
 
+		/*
 		@When("^Enter valid credential$")
 		public void logincredential(DataTable table) throws Throwable {
 		
@@ -58,6 +60,33 @@ public class StepDefinationB {
 			// driver.findElement(By.id(data.get(2).get(0))).sendKeys(data.get(2).get(1));
 			Thread.sleep(1000);
 		}
+		*/
+		
+		
+		@When("^Enter valid credential$")
+		public void logincredential(DataTable table) throws Throwable {
+		
+			List<List<String>> data = table.raw();
+			System.out.println(data.get(1).get(1));
+			driver.findElement(By.id(data.get(1).get(0))).sendKeys(data.get(1).get(1));
+			
+			// Encryption of string:
+			//String encodedBytes = Base64.getEncoder().encodeToString("Cengage1".getBytes());
+			//System.out.print(encodedBytes);
+			
+			// Decryption of string
+			   /* String encryptedPassword = data.get(2).get(1);
+			 	byte[] decryptedPasswordBytes = Base64.getDecoder().decode(encryptedPassword);
+				String decryptedPassword = new String(decryptedPasswordBytes);
+		       */
+		    // System.out.print(decryptedPassword);
+				driver.findElement(By.name(data.get(2).get(0))).sendKeys(data.get(2).get(1));
+			
+				 
+			// driver.findElement(By.id(data.get(2).get(0))).sendKeys(data.get(2).get(1));
+			Thread.sleep(1000);
+		}
+		
 
 		@And("^Click on login button$")
 		public void loginbutton() throws Throwable {
@@ -94,14 +123,24 @@ public class StepDefinationB {
 			   Thread.sleep(1000);
 		}
 		
+		@Then("^Click on Manage Courses link$")
+		public void managecourses() throws Throwable {
+			driver.findElement(By.linkText("Manage Courses")).click();
+			Thread.sleep(1000);
+			
+			for (int count=2; count<11; count++){
+			driver.findElement(By.xpath("//*[@id='manageCourseForm']/table/tbody/tr[3]/td[8]/a/i")).click();
+			Alert all = driver.switchTo().alert();
+			System.out.println(count + ". "+all.getText());
+			Thread.sleep(1000);
+			all.accept();
+			Thread.sleep(1000);
+			}
+			driver.findElement(By.xpath("//*[@id='manageCourseForm']/div[1]/a")).click();
+		}
+		
 		@Then("^Click on Create Course link$")
 		public void createcorusemaster() throws Throwable {
-		    // Express the Regexp above with the code you wish you had
-			
-			//driver.findElement(By.linkText("Create Course")).click();
-			//driver.switchTo().defaultContent();
-		//	driver.manage().window().maximize();
-		//	driver.findElement(By.xpath(".//*[@href='createCourse.htm?unformattedISBN13=9781285860169&amp;iacISBN=9781305580268&amp;componentISBN=9781305580251&amp;type=4LT]"));
 			driver.findElement(By.linkText("Create Course")).click();
 			Thread.sleep(1000);
 		}
